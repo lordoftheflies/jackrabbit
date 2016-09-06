@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE Repository
+          PUBLIC "-//The Apache Software Foundation//DTD Jackrabbit 2.0//EN"
+          "http://jackrabbit.apache.org/dtd/repository-2.0.dtd">
+<Repository>
+    <FileSystem class="org.apache.jackrabbit.core.fs.db.DbFileSystem">
+        <param name="driver" value="org.postgresql.Driver"/>
+        <param name="url" value="jdbc:postgresql://localhost:5432/cms"/>
+        <param name="schema" value="postgresql"/>
+        <param name="user" value="wonderjam"/>
+        <param name="password" value="qwe123"/>
+        <param name="schemaObjectPrefix" value="rep_"/>
+    </FileSystem>
+    <Security appName="wonderjam">
+        <LoginModule class="org.apache.jackrabbit.core.security.simple.SimpleLoginModule">
+            <!--
+              anonymous user name ('anonymous' is the default value)
+            -->
+            <param name="anonymousId" value="anonymous"/>
+            <!--
+              administrator user id (default value if param is missing is 'admin')
+            -->
+            <param name="adminId" value="admin"/>
+        </LoginModule>
+    </Security>
+    <Workspaces rootPath="${rep.home}/workspaces" defaultWorkspace="default">
+        <Workspace name="${wsp.name}">
+            <FileSystem class="org.apache.jackrabbit.core.fs.db.DbFileSystem">
+                <param name="driver" value="org.postgresql.Driver"/>
+                <param name="url" value="jdbc:postgresql://localhost:5432/cms"/>
+                <param name="schema" value="postgresql"/>
+                <param name="user" value="wonderjam"/>
+                <param name="password" value="qwe123"/>
+                <param name="schemaObjectPrefix" value="wonderjam_"/>
+            </FileSystem>
+            <PersistenceManager class="org.apache.jackrabbit.core.persistence.pool.PostgreSQLPersistenceManager">
+                <param name="driver" value="org.postgresql.Driver"/>
+                <param name="url" value="jdbc:postgresql://localhost:5432/cms"/>
+                <param name="user" value="wonderjam"/>
+                <param name="password" value="qwe123"/>
+                <param name="schema" value="postgresql"/>
+                <param name="schemaObjectPrefix" value="${wsp.name}_"/>
+                <param name="externalBLOBs" value="false"/>
+            </PersistenceManager>
+        </Workspace>
+    </Workspaces>
+    <Workspace name="default">
+        <FileSystem class="org.apache.jackrabbit.core.fs.db.DbFileSystem">
+            <param name="driver" value="org.postgresql.Driver"/>
+            <param name="url" value="jdbc:postgresql://localhost:5432/cms"/>
+            <param name="schema" value="postgresql"/>
+            <param name="user" value="wonderjam"/>
+            <param name="password" value="qwe123"/>
+            <param name="schemaObjectPrefix" value="wonderjam_"/>
+        </FileSystem>
+        <PersistenceManager class="org.apache.jackrabbit.core.persistence.pool.PostgreSQLPersistenceManager">
+            <param name="driver" value="org.postgresql.Driver"/>
+            <param name="url" value="jdbc:postgresql://localhost:5432/cms"/>
+            <param name="user" value="wonderjam"/>
+            <param name="password" value="qwe123"/>
+            <param name="schema" value="postgresql"/>
+            <param name="schemaObjectPrefix" value="${wsp.name}_"/>
+            <param name="externalBLOBs" value="false"/>
+        </PersistenceManager>
+    </Workspace>
+    <Versioning rootPath="${rep.home}/version">
+        <FileSystem class="org.apache.jackrabbit.core.fs.db.DbFileSystem">
+            <param name="driver" value="org.postgresql.Driver"/>
+            <param name="url" value="jdbc:postgresql://localhost:5432/cms"/>
+            <param name="schema" value="postgresql"/>
+            <param name="user" value="wonderjam"/>
+            <param name="password" value="qwe123"/>
+            <param name="schemaObjectPrefix" value="wonderjam_"/>
+        </FileSystem>
+        <PersistenceManager class="org.apache.jackrabbit.core.persistence.pool.PostgreSQLPersistenceManager">
+            <param name="driver" value="org.postgresql.Driver"/>
+            <param name="url" value="jdbc:postgresql://localhost:5432/cms"/>
+            <param name="user" value="wonderjam"/>
+            <param name="password" value="qwe123"/>
+            <param name="schema" value="postgresql"/>
+            <param name="schemaObjectPrefix" value="v_"/>
+            <param name="externalBLOBs" value="false"/>
+        </PersistenceManager>
+    </Versioning>
+</Repository>
